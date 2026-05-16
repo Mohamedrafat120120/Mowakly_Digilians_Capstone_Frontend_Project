@@ -12,6 +12,7 @@ import {
   faClock
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const CaseDetails = () => {
   const navigate = useNavigate();
@@ -83,31 +84,56 @@ const CaseDetails = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
               <h2 className="text-xl font-bold text-gray-900 mb-6 text-right">قدّم عرضك..</h2>
               
-              <form className="flex flex-col gap-5 text-right">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">مبلغ عرضك ($)</label>
-                  <input 
-                    type="number" 
-                    className="w-full border border-gray-300 rounded-md p-3 text-sm outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">عرضك</label>
-                  <textarea 
-                    rows="6"
-                    className="w-full border border-gray-300 rounded-md p-3 text-sm outline-none focus:border-blue-500 transition resize-none"
-                  ></textarea>
-                </div>
+              <Formik
+                initialValues={{ offerAmount: "", offerDescription: "" }}
+                validate={values => {
+                  const errors = {};
+                  if (!values.offerAmount) errors.offerAmount = "مطلوب";
+                  if (!values.offerDescription) errors.offerDescription = "مطلوب";
+                  return errors;
+                }}
+                onSubmit={(values, { setSubmitting }) => {
+                  console.log("Offer Submitted:", values);
+                  setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2));
+                    setSubmitting(false);
+                  }, 400);
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <Form className="flex flex-col gap-5 text-right">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">مبلغ عرضك ($)</label>
+                      <Field 
+                        type="number" 
+                        name="offerAmount"
+                        className="w-full border border-gray-300 rounded-md p-3 text-sm outline-none focus:border-blue-500 transition"
+                      />
+                      <ErrorMessage name="offerAmount" component="div" className="text-red-500 text-xs mt-1" />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">عرضك</label>
+                      <Field 
+                        as="textarea"
+                        name="offerDescription"
+                        rows="6"
+                        className="w-full border border-gray-300 rounded-md p-3 text-sm outline-none focus:border-blue-500 transition resize-none"
+                      />
+                      <ErrorMessage name="offerDescription" component="div" className="text-red-500 text-xs mt-1" />
+                    </div>
 
-                <button 
-                  type="button"
-                  className="w-full bg-[#ffc107] hover:bg-[#e0a800] text-white font-bold py-3 rounded-md transition flex items-center justify-center gap-2 mt-2"
-                >
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                  تأكيد عرضك
-                </button>
-              </form>
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#ffc107] hover:bg-[#e0a800] text-white font-bold py-3 rounded-md transition flex items-center justify-center gap-2 mt-2"
+                    >
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                      تأكيد عرضك
+                    </button>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
 
