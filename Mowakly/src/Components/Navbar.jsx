@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faUser, faCreditCard } from "@fortawesome/free-regular-svg-icons";
 import { faChartPie, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ disableActiveCases }) => {
+const Navbar = ({ disableActiveCases, isGuest = false }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -54,61 +54,67 @@ const Navbar = ({ disableActiveCases }) => {
             تصفح المحامين
           </NavLink>
         </div>
-        {/* Left - Icons */}
-        <div className="flex items-center gap-6">
-          <img
-            src={searchIcon}
-            alt="Search"
-            className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-          />
-          <img
-            src={emailIcon}
-            alt="Email"
-            className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-          />
-          <img
-            src={notificationIcon}
-            alt="Notifications"
-            className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-          />
-          
-          {/* User Icon with Dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            <img
-              src={userIcon}
-              alt="User"
-              className="w-6 h-6 cursor-pointer"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            />
-
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute top-10 left-0 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700">
-                {/* <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                  <span>تغير الوضع</span>
-                  <FontAwesomeIcon icon={faMoon} className="text-gray-400" />
-                </button> */}
-                <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                  <span>لوحة التحكم</span>
-                  <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
-                </button>
-                <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                  <span>حسابي الشخصي</span>
-                  <FontAwesomeIcon icon={faUser} className="text-gray-400" />
-                </button>
-                <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                  <span>الرصيد</span>
-                  <FontAwesomeIcon icon={faCreditCard} className="text-gray-400" />
-                </button>
-                <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right border-t border-gray-100 mt-1 pt-3">
-                  <span>تسجيل الخروج</span>
-                  <FontAwesomeIcon icon={faArrowRightFromBracket} className="text-gray-400" />
-                </button>
-              </div>
-            )}
+        {/* Left - Auth Buttons or Icons */}
+        {isGuest ? (
+          <div className="flex items-center gap-4">
+            <Link to="/login" className="px-6 py-2 text-sm border border-gray-300 font-medium rounded-md hover:bg-gray-50 transition">
+              تسجيل الدخول
+            </Link>
+            <Link to="/register" className="px-6 py-2 text-sm bg-[#333] text-white font-medium rounded-md hover:bg-black transition">
+              ابدأ
+            </Link>
           </div>
+        ) : (
+          <div className="flex items-center gap-6">
+            <img
+              src={searchIcon}
+              alt="Search"
+              className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+            />
+            <img
+              src={emailIcon}
+              alt="Email"
+              className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+            />
+            <img
+              src={notificationIcon}
+              alt="Notifications"
+              className="w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+            />
+            
+            {/* User Icon with Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <img
+                src={userIcon}
+                alt="User"
+                className="w-6 h-6 cursor-pointer"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
 
-        </div>
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute top-10 left-0 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700">
+                  <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                    <span>لوحة التحكم</span>
+                    <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
+                  </button>
+                  <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                    <span>حسابي الشخصي</span>
+                    <FontAwesomeIcon icon={faUser} className="text-gray-400" />
+                  </Link>
+                  <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                    <span>الرصيد</span>
+                    <FontAwesomeIcon icon={faCreditCard} className="text-gray-400" />
+                  </button>
+                  <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right border-t border-gray-100 mt-1 pt-3">
+                    <span>تسجيل الخروج</span>
+                    <FontAwesomeIcon icon={faArrowRightFromBracket} className="text-gray-400" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
