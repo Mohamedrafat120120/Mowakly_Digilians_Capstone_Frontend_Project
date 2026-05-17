@@ -101,7 +101,7 @@ export default function Home() {
       className="min-h-screen bg-[#f8f9fa] flex flex-col font-sans"
       dir="rtl"
     >
-      <Navbar />
+      <Navbar isGuest={true} />
 
       <main className="flex-1 w-full">
         {/* Hero Section */}

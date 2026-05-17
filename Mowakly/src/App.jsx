@@ -12,6 +12,7 @@ import PostCase from "./Pages/PostCase";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
 import "./App.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/lawyer/:id" element={<LawyerProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile-details" element={<Profile />} />
       </Routes>
     </Router>
   );
