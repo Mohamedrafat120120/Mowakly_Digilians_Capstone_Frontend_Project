@@ -83,9 +83,7 @@ const Register = () => {
         
         {/* Title Section */}
         <div className="text-center mb-8">
-          <div className="inline-block px-8 py-2 border border-yellow-400 text-yellow-500 font-medium rounded-md mb-6">
-            إنشاء حساب
-          </div>
+
           <div className="flex justify-center mb-2 text-yellow-500">
             <FontAwesomeIcon icon={faScaleBalanced} className="text-5xl" />
           </div>
