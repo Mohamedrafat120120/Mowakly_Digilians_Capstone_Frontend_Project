@@ -13,6 +13,7 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Profile from "./Pages/Profile";
+import Verification from "./Pages/Verification";
 import "./App.css";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile-details" element={<Profile />} />
+        <Route path="/verification" element={<Verification />} />
       </Routes>
     </Router>
   );
