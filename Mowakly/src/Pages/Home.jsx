@@ -236,37 +236,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Student Journey */}
-        <section className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              كيف تبدأ رحلتك مع موكّلي كطالب حقوق؟
-            </h2>
-            <p className="text-gray-600 text-sm">
-              ثلاث خطوات بسيطة للعثور على التدريب القانوني المناسب
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <StepCard
-              icon={<img src={portfolioIcon} alt="icon" className="w-14 h-14" />}
-              step="الخطوة الاولى"
-              title="أنشئ ملفك الشخصي"
-              desc="عرّف أصحاب الفرص بخبراتك، مهاراتك، واهتماماتك القانونية."
-            />
-            <StepCard
-              icon={<img src={certificateIcon} alt="icon" className="w-14 h-14" />}
-              step="الخطوة الثانية"
-              title="تصفح فرص التدريب المكتبية"
-              desc="استكشف فرص التدريب المقدمة من مكاتب المحاماة والشركات."
-            />
-            <StepCard
-              icon={<img src={correctIcon} alt="icon" className="w-14 h-14" />}
-              step="الخطوة الثالثة"
-              title="تأكيد اختيار التدرب المناسب"
-              desc="قدّم على الفرصة المناسبة وتابع طلبك حتى القبول."
-            />
-          </div>
-        </section>
+    
 
         {/* Top Lawyers */}
         <section className="bg-white py-16">
