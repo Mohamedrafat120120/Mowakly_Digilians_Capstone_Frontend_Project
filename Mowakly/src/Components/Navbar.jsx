@@ -98,7 +98,7 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                     <span>لوحة التحكم</span>
                     <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
                   </button>
-                  <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                  <Link to="/profile-details" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
                     <span>حسابي الشخصي</span>
                     <FontAwesomeIcon icon={faUser} className="text-gray-400" />
                   </Link>

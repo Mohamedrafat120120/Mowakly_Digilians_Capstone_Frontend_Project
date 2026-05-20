@@ -61,10 +61,10 @@ const ImageUploadBox = ({ label }) => {
             <span className="text-[10px] text-gray-400 mt-2 font-medium">اختر صورة أو التقطها</span>
           </div>
         )}
-        <input 
-          type="file" 
-          accept="image/*" 
-          className="hidden" 
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
           onChange={handleImageChange}
         />
       </label>
@@ -80,7 +80,7 @@ const Register = () => {
       <GuestNavbar />
 
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-12 flex flex-col items-center">
-        
+
         {/* Title Section */}
         <div className="text-center mb-8">
 
@@ -96,10 +96,10 @@ const Register = () => {
         {/* Form Card */}
         <div className="w-full bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.03)] border border-gray-100 p-8 mb-12 relative">
           <div className="absolute top-8 right-8 text-xl font-bold text-gray-800">أنا...</div>
-          
+
           {/* Toggle */}
           <div className="flex justify-center gap-6 mb-8 mt-12">
-            <button 
+            <button
               onClick={() => setRole('client')}
               className={`flex flex-col items-center justify-center w-40 h-28 rounded-lg border transition ${role === 'client' ? 'border-gray-300 bg-[#f5f7f9]' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
             >
@@ -109,8 +109,8 @@ const Register = () => {
               <span className="font-bold text-sm">مستخدم</span>
               <span className="text-[10px] text-gray-500 mt-1">ابحث عن محام وأنشئ قضيتك</span>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => setRole('lawyer')}
               className={`flex flex-col items-center justify-center w-40 h-28 rounded-lg border transition ${role === 'lawyer' ? 'border-gray-300 bg-[#f5f7f9]' : 'border-gray-200 bg-white hover:bg-gray-50'}`}
             >
@@ -125,7 +125,7 @@ const Register = () => {
           {/* Form */}
           <form className="w-full" onSubmit={(e) => e.preventDefault()}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-              
+
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 text-right">الاسم كاملاً</label>
                 <input type="text" className="w-full border border-gray-200 rounded-md p-3 outline-none focus:border-gray-400 text-right transition" />
@@ -148,14 +148,12 @@ const Register = () => {
 
               {role === 'lawyer' && (
                 <>
-                  <ImageUploadBox label="الكارنية المهني" />
-                  <ImageUploadBox label="البطاقة القومية" />
 
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2 text-right">العنوان</label>
                     <input type="text" className="w-full border border-gray-200 rounded-md p-3 outline-none focus:border-gray-400 text-right transition" />
                   </div>
-                  
+
                   <ImageUploadBox label="الصورة الشخصية" />
 
                   <div className="row-span-2 flex flex-col h-full">
