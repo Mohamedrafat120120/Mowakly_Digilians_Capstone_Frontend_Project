@@ -7,8 +7,8 @@ import userIcon from "../assets/images/icons/user 11.svg";
 import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCreditCard, faEnvelope, faBell } from "@fortawesome/free-regular-svg-icons";
-import { 
-  faChartPie, 
+import {
+  faChartPie,
   faArrowRightFromBracket,
   faBars,
   faTimes,
@@ -24,7 +24,7 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
-  
+
   const dropdownRef = useRef(null);
   const notificationRef = useRef(null);
   const messageRef = useRef(null);
@@ -64,8 +64,8 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
           {/* Right - Burger & Logo */}
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsDrawerOpen(true)} 
+            <button
+              onClick={() => setIsDrawerOpen(true)}
               className="text-gray-600 hover:text-black transition p-2"
               aria-label="Open Menu"
             >
@@ -117,7 +117,7 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                 alt="Search"
                 className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
               />
-              
+
               {/* Message Icon with Dropdown */}
               <div className="relative" ref={messageRef}>
                 <img
@@ -159,7 +159,7 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                   </div>
                 )}
               </div>
-              
+
               {/* User Icon with Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <img
@@ -183,11 +183,11 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                     <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
                       <span>حسابي الشخصي</span>
                       <FontAwesomeIcon icon={faUser} className="text-gray-400" />
-                    </Link>
-                    <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                      <span>الرصيد</span>
+                    </Link >
+                    <Link to="/subscriptions" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                      <span>الاشتراكات</span>
                       <FontAwesomeIcon icon={faCreditCard} className="text-gray-400" />
-                    </button>
+                    </Link>
                     <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right border-t border-gray-100 mt-1 pt-3">
                       <span>تسجيل الخروج</span>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} className="text-gray-400" />
@@ -202,14 +202,14 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
 
       {/* Drawer Overlay */}
       {isDrawerOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/40 z-[60] transition-opacity"
           onClick={() => setIsDrawerOpen(false)}
         />
       )}
 
       {/* Slide-out Drawer (RTL aligned, opens from right) */}
-      <div 
+      <div
         className={`fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out flex flex-col ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
         dir="rtl"
       >
@@ -219,7 +219,7 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
             <FontAwesomeIcon icon={faTimes} className="text-xl" />
           </button>
         </div>
-        
+
         <div className="flex flex-col py-6 px-4 gap-2 overflow-y-auto">
           <Link to="/" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faThLarge} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />

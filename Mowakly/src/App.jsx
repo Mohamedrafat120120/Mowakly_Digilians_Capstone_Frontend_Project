@@ -15,6 +15,7 @@ import Home from "./Pages/Home";
 import Profile from "./Pages/Profile";
 import Verification from "./Pages/Verification";
 import Payment from "./Pages/Payment";
+import Subscriptions from "./Pages/Subscriptions";
 import "./App.css";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/profile-details" element={<Profile />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/subscriptions" element={<Subscriptions />} />
       </Routes>
     </Router>
   );
