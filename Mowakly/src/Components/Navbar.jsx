@@ -22,13 +22,24 @@ import {
 const Navbar = ({ disableActiveCases, isGuest = false }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isMessageOpen, setIsMessageOpen] = useState(false);
+  
   const dropdownRef = useRef(null);
+  const notificationRef = useRef(null);
+  const messageRef = useRef(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
+      }
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        setIsNotificationOpen(false);
+      }
+      if (messageRef.current && !messageRef.current.contains(event.target)) {
+        setIsMessageOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -106,16 +117,48 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                 alt="Search"
                 className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
               />
-              <img
-                src={emailIcon}
-                alt="Email"
-                className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-              />
-              <img
-                src={notificationIcon}
-                alt="Notifications"
-                className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-              />
+              
+              {/* Message Icon with Dropdown */}
+              <div className="relative" ref={messageRef}>
+                <img
+                  src={emailIcon}
+                  alt="Email"
+                  className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+                  onClick={() => {
+                    setIsMessageOpen(!isMessageOpen);
+                    setIsNotificationOpen(false);
+                    setIsDropdownOpen(false);
+                  }}
+                />
+                {isMessageOpen && (
+                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
+                    <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الرسائل</div>
+                    <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد رسائل جديدة</div>
+                    <Link to="/messages" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsMessageOpen(false)}>عرض كل الرسائل</Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Notification Icon with Dropdown */}
+              <div className="relative" ref={notificationRef}>
+                <img
+                  src={notificationIcon}
+                  alt="Notifications"
+                  className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+                  onClick={() => {
+                    setIsNotificationOpen(!isNotificationOpen);
+                    setIsMessageOpen(false);
+                    setIsDropdownOpen(false);
+                  }}
+                />
+                {isNotificationOpen && (
+                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
+                    <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الإشعارات</div>
+                    <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد إشعارات جديدة</div>
+                    <Link to="/notifications" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsNotificationOpen(false)}>عرض كل الإشعارات</Link>
+                  </div>
+                )}
+              </div>
               
               {/* User Icon with Dropdown */}
               <div className="relative" ref={dropdownRef}>
@@ -123,7 +166,11 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                   src={userIcon}
                   alt="User"
                   className="w-6 h-6 cursor-pointer"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  onClick={() => {
+                    setIsDropdownOpen(!isDropdownOpen);
+                    setIsMessageOpen(false);
+                    setIsNotificationOpen(false);
+                  }}
                 />
 
                 {/* Dropdown Menu */}
@@ -174,15 +221,15 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
         </div>
         
         <div className="flex flex-col py-6 px-4 gap-2 overflow-y-auto">
-          <Link to="/" className="flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
+          <Link to="/" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faThLarge} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">الرئيسية</span>
           </Link>
-          <Link to="/lawyers" className="flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
+          <Link to="/lawyers" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faScaleBalanced} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">المحامون</span>
           </Link>
-          <Link to="/cases" className="flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
+          <Link to="/cases" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faFileContract} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">القضايا</span>
           </Link>
@@ -190,11 +237,11 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
             <FontAwesomeIcon icon={faUserShield} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">التحقق من الهوية</span>
           </Link>
-          <Link to="/messages" className="flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
+          <Link to="/messages" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">الرسائل</span>
           </Link>
-          <Link to="/notifications" className="flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
+          <Link to="/notifications" className="md:hidden flex items-center justify-start gap-4 px-4 py-3 hover:bg-gray-50 rounded-xl transition text-right group" onClick={() => setIsDrawerOpen(false)}>
             <FontAwesomeIcon icon={faBell} className="text-gray-400 group-hover:text-slate-800 text-lg w-6" />
             <span className="font-bold text-gray-600 group-hover:text-slate-800">الإشعارات</span>
           </Link>
