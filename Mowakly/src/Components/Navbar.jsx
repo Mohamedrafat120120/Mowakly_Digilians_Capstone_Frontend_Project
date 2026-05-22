@@ -60,17 +60,10 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
 
   return (
     <>
-      <nav className="w-full bg-white border-b border-gray-200 relative z-[40]" dir="rtl">
+      <nav className={`bg-white border-b border-gray-200 relative z-[40] transition-all duration-300 ${isDrawerOpen ? 'ml-72' : ''}`} dir="rtl">
         <div className="container mx-auto flex items-center justify-between px-4 py-2">
-          {/* Right - Burger & Logo */}
+          {/* Right - Logo */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsDrawerOpen(true)}
-              className="text-gray-600 hover:text-black transition p-2"
-              aria-label="Open Menu"
-            >
-              <FontAwesomeIcon icon={faBars} className="text-xl" />
-            </button>
             <Link to="/" className="flex items-center">
               <img
                 src={logo}
@@ -100,103 +93,114 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
             </NavLink>
           </div>
 
-          {/* Left - Auth Buttons or Icons */}
-          {isGuest ? (
-            <div className="hidden md:flex items-center gap-4">
-              <Link to="/login" className="px-6 py-2 text-sm border border-gray-300 font-medium rounded-md hover:bg-gray-50 transition">
-                تسجيل الدخول
-              </Link>
-              <Link to="/register" className="px-6 py-2 text-sm bg-[#333] text-white font-medium rounded-md hover:bg-black transition">
-                ابدأ
-              </Link>
-            </div>
-          ) : (
-            <div className="flex items-center gap-4 md:gap-6">
-              <img
-                src={searchIcon}
-                alt="Search"
-                className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-              />
-
-              {/* Message Icon with Dropdown */}
-              <div className="relative" ref={messageRef}>
+          {/* Left - Auth Buttons, Icons & Burger */}
+          <div className="flex items-center gap-4 md:gap-6">
+            {isGuest ? (
+              <div className="hidden md:flex items-center gap-4">
+                <Link to="/login" className="px-6 py-2 text-sm border border-gray-300 font-medium rounded-md hover:bg-gray-50 transition">
+                  تسجيل الدخول
+                </Link>
+                <Link to="/register" className="px-6 py-2 text-sm bg-[#333] text-white font-medium rounded-md hover:bg-black transition">
+                  ابدأ
+                </Link>
+              </div>
+            ) : (
+              <div className="flex items-center gap-4 md:gap-6">
                 <img
-                  src={emailIcon}
-                  alt="Email"
+                  src={searchIcon}
+                  alt="Search"
                   className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-                  onClick={() => {
-                    setIsMessageOpen(!isMessageOpen);
-                    setIsNotificationOpen(false);
-                    setIsDropdownOpen(false);
-                  }}
-                />
-                {isMessageOpen && (
-                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
-                    <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الرسائل</div>
-                    <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد رسائل جديدة</div>
-                    <Link to="/messages" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsMessageOpen(false)}>عرض كل الرسائل</Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Notification Icon with Dropdown */}
-              <div className="relative" ref={notificationRef}>
-                <img
-                  src={notificationIcon}
-                  alt="Notifications"
-                  className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
-                  onClick={() => {
-                    setIsNotificationOpen(!isNotificationOpen);
-                    setIsMessageOpen(false);
-                    setIsDropdownOpen(false);
-                  }}
-                />
-                {isNotificationOpen && (
-                  <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
-                    <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الإشعارات</div>
-                    <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد إشعارات جديدة</div>
-                    <Link to="/notifications" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsNotificationOpen(false)}>عرض كل الإشعارات</Link>
-                  </div>
-                )}
-              </div>
-
-              {/* User Icon with Dropdown */}
-              <div className="relative" ref={dropdownRef}>
-                <img
-                  src={userIcon}
-                  alt="User"
-                  className="w-6 h-6 cursor-pointer"
-                  onClick={() => {
-                    setIsDropdownOpen(!isDropdownOpen);
-                    setIsMessageOpen(false);
-                    setIsNotificationOpen(false);
-                  }}
                 />
 
-                {/* Dropdown Menu */}
-                {isDropdownOpen && (
-                  <div className="absolute top-10 left-0 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
-                    <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                      <span>لوحة التحكم</span>
-                      <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
-                    </button>
-                    <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                      <span>حسابي الشخصي</span>
-                      <FontAwesomeIcon icon={faUser} className="text-gray-400" />
-                    </Link >
-                    <Link to="/subscriptions" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                      <span>الاشتراكات</span>
-                      <FontAwesomeIcon icon={faCreditCard} className="text-gray-400" />
-                    </Link>
-                    <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right border-t border-gray-100 mt-1 pt-3">
-                      <span>تسجيل الخروج</span>
-                      <FontAwesomeIcon icon={faArrowRightFromBracket} className="text-gray-400" />
-                    </button>
-                  </div>
-                )}
+                {/* Message Icon with Dropdown */}
+                <div className="relative" ref={messageRef}>
+                  <img
+                    src={emailIcon}
+                    alt="Email"
+                    className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+                    onClick={() => {
+                      setIsMessageOpen(!isMessageOpen);
+                      setIsNotificationOpen(false);
+                      setIsDropdownOpen(false);
+                    }}
+                  />
+                  {isMessageOpen && (
+                    <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
+                      <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الرسائل</div>
+                      <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد رسائل جديدة</div>
+                      <Link to="/messages" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsMessageOpen(false)}>عرض كل الرسائل</Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* Notification Icon with Dropdown */}
+                <div className="relative" ref={notificationRef}>
+                  <img
+                    src={notificationIcon}
+                    alt="Notifications"
+                    className="hidden md:block w-5 h-5 cursor-pointer opacity-70 hover:opacity-100 transition"
+                    onClick={() => {
+                      setIsNotificationOpen(!isNotificationOpen);
+                      setIsMessageOpen(false);
+                      setIsDropdownOpen(false);
+                    }}
+                  />
+                  {isNotificationOpen && (
+                    <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
+                      <div className="px-4 py-3 border-b border-gray-50 font-bold text-right text-gray-800">الإشعارات</div>
+                      <div className="px-4 py-12 text-center text-gray-400 text-xs font-medium">لا توجد إشعارات جديدة</div>
+                      <Link to="/notifications" className="px-4 py-3 text-center text-blue-600 hover:bg-gray-50 font-bold border-t border-gray-50 mt-2 transition" onClick={() => setIsNotificationOpen(false)}>عرض كل الإشعارات</Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* User Icon with Dropdown */}
+                <div className="relative" ref={dropdownRef}>
+                  <img
+                    src={userIcon}
+                    alt="User"
+                    className="w-6 h-6 cursor-pointer"
+                    onClick={() => {
+                      setIsDropdownOpen(!isDropdownOpen);
+                      setIsMessageOpen(false);
+                      setIsNotificationOpen(false);
+                    }}
+                  />
+
+                  {/* Dropdown Menu */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-10 left-0 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
+                      <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                        <span>لوحة التحكم</span>
+                        <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
+                      </button>
+                      <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                        <span>حسابي الشخصي</span>
+                        <FontAwesomeIcon icon={faUser} className="text-gray-400" />
+                      </Link >
+                      <Link to="/subscriptions" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
+                        <span>الاشتراكات</span>
+                        <FontAwesomeIcon icon={faCreditCard} className="text-gray-400" />
+                      </Link>
+                      <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right border-t border-gray-100 mt-1 pt-3">
+                        <span>تسجيل الخروج</span>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} className="text-gray-400" />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Burger Menu Button */}
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="text-gray-600 hover:text-black transition p-2"
+              aria-label="Open Menu"
+            >
+              <FontAwesomeIcon icon={faBars} className="text-xl" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -208,9 +212,9 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
         />
       )}
 
-      {/* Slide-out Drawer (RTL aligned, opens from right) */}
+      {/* Slide-out Drawer (Opens from left) */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out flex flex-col ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-[70] transform transition-transform duration-300 ease-in-out flex flex-col ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
         dir="rtl"
       >
         <div className="p-4 flex justify-between items-center border-b border-gray-100">
