@@ -170,10 +170,6 @@ const Navbar = ({ disableActiveCases, isGuest = false }) => {
                   {/* Dropdown Menu */}
                   {isDropdownOpen && (
                     <div className="absolute top-10 left-0 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-2 flex flex-col text-sm text-gray-700 z-50">
-                      <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
-                        <span>لوحة التحكم</span>
-                        <FontAwesomeIcon icon={faChartPie} className="text-gray-400" />
-                      </button>
                       <Link to="/profile" className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition w-full text-right">
                         <span>حسابي الشخصي</span>
                         <FontAwesomeIcon icon={faUser} className="text-gray-400" />
