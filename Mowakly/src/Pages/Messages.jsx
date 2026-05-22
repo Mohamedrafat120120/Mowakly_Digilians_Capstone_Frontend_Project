@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faSearch, 
-  faPaperPlane, 
-  faPaperclip, 
-  faSmile, 
-  faArrowRight, 
-  faEllipsisV, 
-  faPhone, 
-  faVideo 
+import {
+  faSearch,
+  faPaperPlane,
+  faPaperclip,
+  faSmile,
+  faArrowRight,
+  faEllipsisV,
+  faPhone,
+  faVideo
 } from '@fortawesome/free-solid-svg-icons';
 
 const mockContacts = [
@@ -30,7 +30,7 @@ const mockChatHistory = [
 const Messages = () => {
   const [activeChatId, setActiveChatId] = useState(mockContacts[0].id);
   const [messageText, setMessageText] = useState("");
-  
+
   // Mobile view logic: if an active chat is selected, show it and hide sidebar.
   // On desktop, both are always shown.
   const isChatActive = activeChatId !== null;
@@ -43,16 +43,16 @@ const Messages = () => {
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 flex overflow-hidden h-full">
         <div className="bg-white border border-gray-200 rounded-2xl shadow-sm flex w-full overflow-hidden">
-          
+
           {/* Sidebar - Contacts List */}
           <div className={`${isChatActive ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-80 lg:w-96 border-l border-gray-100 bg-white`}>
             {/* Sidebar Header */}
             <div className="p-4 border-b border-gray-100">
               <h2 className="text-xl font-bold text-slate-800 mb-4">الرسائل</h2>
               <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="ابحث عن محادثة..." 
+                <input
+                  type="text"
+                  placeholder="ابحث عن محادثة..."
                   className="w-full bg-gray-50 border border-gray-200 rounded-xl py-2.5 px-10 text-sm focus:outline-none focus:border-slate-400 focus:bg-white transition"
                 />
                 <FontAwesomeIcon icon={faSearch} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
@@ -62,7 +62,7 @@ const Messages = () => {
             {/* Contacts List */}
             <div className="flex-1 overflow-y-auto">
               {mockContacts.map((contact) => (
-                <div 
+                <div
                   key={contact.id}
                   onClick={() => setActiveChatId(contact.id)}
                   className={`flex items-center gap-3 p-4 cursor-pointer border-b border-gray-50 hover:bg-gray-50 transition ${activeChatId === contact.id ? 'bg-blue-50/50 border-l-4 border-l-blue-500' : 'border-l-4 border-l-transparent'}`}
@@ -94,12 +94,12 @@ const Messages = () => {
 
           {/* Active Chat Area */}
           <div className={`${!isChatActive ? 'hidden md:flex' : 'flex'} flex-col flex-1 bg-[#fcfcfc]`}>
-            
+
             {/* Chat Header */}
             {activeContact && (
               <div className="h-16 px-6 border-b border-gray-100 bg-white flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
-                  <button 
+                  <button
                     className="md:hidden text-gray-500 hover:text-slate-800 p-2 ml-1"
                     onClick={() => setActiveChatId(null)}
                   >
@@ -116,7 +116,7 @@ const Messages = () => {
                     <p className="text-[11px] text-gray-500">{activeContact.online ? 'متصل الآن' : 'غير متصل'}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 text-gray-400">
                   <button className="hover:text-slate-700 transition"><FontAwesomeIcon icon={faPhone} /></button>
                   <button className="hover:text-slate-700 transition"><FontAwesomeIcon icon={faVideo} /></button>
@@ -130,7 +130,7 @@ const Messages = () => {
               <div className="text-center text-xs text-gray-400 my-4">
                 اليوم
               </div>
-              
+
               {mockChatHistory.map((msg) => {
                 const isMe = msg.senderId === 'me';
                 return (
@@ -155,23 +155,23 @@ const Messages = () => {
                 <button className="w-10 h-10 rounded-full text-gray-400 hover:text-slate-700 flex items-center justify-center transition shrink-0">
                   <FontAwesomeIcon icon={faPaperclip} className="text-lg" />
                 </button>
-                
-                <input 
-                  type="text" 
-                  placeholder="اكتب رسالتك هنا..." 
+
+                <input
+                  type="text"
+                  placeholder="اكتب رسالتك هنا..."
                   className="flex-1 bg-transparent border-none focus:outline-none px-2 text-sm text-slate-700"
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
                 />
-                
+
                 <button className={`w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 ${messageText.trim() ? 'bg-yellow-500 text-slate-900 hover:bg-yellow-400' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
-                  <FontAwesomeIcon icon={faPaperPlane} className={dir="ltr"} />
+                  <FontAwesomeIcon icon={faPaperPlane} className={dir = "ltr"} />
                 </button>
               </div>
             </div>
-            
+
           </div>
-          
+
         </div>
       </main>
 
