@@ -16,6 +16,7 @@ import Profile from "./Pages/Profile";
 import Verification from "./Pages/Verification";
 import Payment from "./Pages/Payment";
 import Subscriptions from "./Pages/Subscriptions";
+import Messages from "./Pages/Messages";
 import "./App.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </Router>
   );

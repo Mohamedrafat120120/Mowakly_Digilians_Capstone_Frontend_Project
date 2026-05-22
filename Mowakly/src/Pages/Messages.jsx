@@ -165,7 +165,7 @@ const Messages = () => {
                 />
                 
                 <button className={`w-10 h-10 rounded-full flex items-center justify-center transition shrink-0 ${messageText.trim() ? 'bg-yellow-500 text-slate-900 hover:bg-yellow-400' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
-                  <FontAwesomeIcon icon={faPaperPlane} className={dir="ltr"} />
+                  <FontAwesomeIcon icon={faPaperPlane} className="rotate-180" />
                 </button>
               </div>
             </div>
